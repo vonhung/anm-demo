@@ -39,6 +39,12 @@ public class BasePage {
 		return driver.getCurrentUrl();
 	}
 	
+	public String getLocalStorage (WebDriver driver, String websiteId) {
+		jsExecutor = (JavascriptExecutor) driver;
+		return (String) jsExecutor.executeScript(String.format(
+		        "return window.localStorage.getItem('%s');", "configData-"+ websiteId));
+	}
+	
 	public Alert waitForAlertPresence(WebDriver driver) {
 		explicitWait = new WebDriverWait(driver, longTimeout); 
 		return explicitWait.until(ExpectedConditions.alertIsPresent());
